@@ -1,0 +1,75 @@
+﻿@model AdaptItAcademy.BusinessLogic.Models.TrainingModel
+@using System.ComponentModel.DataAnnotations;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Training Courses</h2>
+
+<p>
+    <button onclick="location.href='@Url.Action("Create", "TrainingAction")'" class="btn btn-primary">Add New</button>
+</p>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th style="width:10%">Action</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Venue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfSits)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrainingCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegClosingDate)
+        </th>
+    </tr>
+    @if (Model != null && Model.TrainingList.Count > 0)
+    {
+        foreach (var item in Model.TrainingList)
+        {
+            var startDate = item.StartDate.ToShortDateString();
+            var endDate = item.EndDate.ToShortDateString();
+            var closingDate = item.RegClosingDate.ToShortDateString();
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Venue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfSits)
+                </td>
+                <td>
+                    
+                    @Html.DisplayFor(modelItem => startDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => endDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrainingCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => closingDate)
+                </td>
+            </tr>
+        }
+    }
+</table>

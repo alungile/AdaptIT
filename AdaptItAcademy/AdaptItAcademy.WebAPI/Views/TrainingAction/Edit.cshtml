@@ -1,0 +1,97 @@
+﻿@model AdaptItAcademy.BusinessLogic.Models.TrainingModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Training Course</h2>
+
+@using (Html.BeginForm("Edit", "TrainingAction", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                @if (Model != null && !string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                <div id="errorMsg" class="alert-danger alert-error">
+                    @Html.Raw(Model.ErrorMessage)
+                </div>
+                }
+                @if (Model != null && !string.IsNullOrEmpty(Model.SuccessMessage))
+                {
+                    <div id="successMsg" class="alert-info alert-primary">
+                        @Model.SuccessMessage
+                    </div>
+                }
+            </div>
+        </div><br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Venue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Venue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Venue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CourseID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CourseID, new SelectList(Model.CoursesList,"ID", "CourseName", Model.CourseID), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CourseID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumberOfSits, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumberOfSits, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumberOfSits, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TrainingCost, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TrainingCost, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TrainingCost, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RegClosingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RegClosingDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RegClosingDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <button id="btnCancel" formaction="Index" class="btn btn-default">Cancel</button>
+            </div>
+        </div>
+    </div>
+}
+

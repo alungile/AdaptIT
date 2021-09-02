@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AdaptItAcademyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseName" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CourseCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CourseDescr" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="IsCoursePaidFor" Type="bit" Nullable="false" />
+    <Property Name="IsCourseActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Delegates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DietaryID" Type="int" Nullable="false" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PostalAddress1" Type="varchar" MaxLength="50" />
+    <Property Name="PostalAddress2" Type="varchar" MaxLength="50" />
+    <Property Name="PostalAddress3" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PostalCity" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PostalCode" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="PhysicalAddress1" Type="varchar" MaxLength="50" />
+    <Property Name="PhysicalAddress2" Type="varchar" MaxLength="50" />
+    <Property Name="PhysicalAddress3" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhysicalCity" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PhysicalCode" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="CourseID" Type="int" />
+  </EntityType>
+  <EntityType Name="DietaryRequirements">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Diet" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Training">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Venue" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="NumberOfSits" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="TrainingCost" Type="decimal" Precision="6" Scale="2" />
+    <Property Name="RegClosingDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Delegates_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Delegates" Type="Self.Delegates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Delegates">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Delegates_DietaryRequirements">
+    <End Role="DietaryRequirements" Type="Self.DietaryRequirements" Multiplicity="1" />
+    <End Role="Delegates" Type="Self.Delegates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DietaryRequirements">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Delegates">
+        <PropertyRef Name="DietaryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Training_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="Training" Type="Self.Training" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Training">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AdaptItAcademyModelStoreContainer">
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Delegates" EntityType="Self.Delegates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DietaryRequirements" EntityType="Self.DietaryRequirements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Training" EntityType="Self.Training" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Delegates_Course" Association="Self.FK_Delegates_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Delegates" EntitySet="Delegates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Delegates_DietaryRequirements" Association="Self.FK_Delegates_DietaryRequirements">
+      <End Role="DietaryRequirements" EntitySet="DietaryRequirements" />
+      <End Role="Delegates" EntitySet="Delegates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Training_Course" Association="Self.FK_Training_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Training" EntitySet="Training" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

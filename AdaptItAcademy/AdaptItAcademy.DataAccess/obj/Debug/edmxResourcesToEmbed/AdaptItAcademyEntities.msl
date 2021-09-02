@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AdaptItAcademyModelStoreContainer" CdmEntityContainer="AdaptItAcademyEntities">
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="AdaptItAcademyModel.Course">
+        <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+          <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+          <ScalarProperty Name="CourseDescr" ColumnName="CourseDescr" />
+          <ScalarProperty Name="IsCoursePaidFor" ColumnName="IsCoursePaidFor" />
+          <ScalarProperty Name="IsCourseActive" ColumnName="IsCourseActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Delegates">
+      <EntityTypeMapping TypeName="AdaptItAcademyModel.Delegate">
+        <MappingFragment StoreEntitySet="Delegates">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DietaryID" ColumnName="DietaryID" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="PostalAddress1" ColumnName="PostalAddress1" />
+          <ScalarProperty Name="PostalAddress2" ColumnName="PostalAddress2" />
+          <ScalarProperty Name="PostalAddress3" ColumnName="PostalAddress3" />
+          <ScalarProperty Name="PostalCity" ColumnName="PostalCity" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="PhysicalAddress1" ColumnName="PhysicalAddress1" />
+          <ScalarProperty Name="PhysicalAddress2" ColumnName="PhysicalAddress2" />
+          <ScalarProperty Name="PhysicalAddress3" ColumnName="PhysicalAddress3" />
+          <ScalarProperty Name="PhysicalCity" ColumnName="PhysicalCity" />
+          <ScalarProperty Name="PhysicalCode" ColumnName="PhysicalCode" />
+          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DietaryRequirements">
+      <EntityTypeMapping TypeName="AdaptItAcademyModel.DietaryRequirement">
+        <MappingFragment StoreEntitySet="DietaryRequirements">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Diet" ColumnName="Diet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trainings">
+      <EntityTypeMapping TypeName="AdaptItAcademyModel.Training">
+        <MappingFragment StoreEntitySet="Training">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Venue" ColumnName="Venue" />
+          <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+          <ScalarProperty Name="NumberOfSits" ColumnName="NumberOfSits" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="TrainingCost" ColumnName="TrainingCost" />
+          <ScalarProperty Name="RegClosingDate" ColumnName="RegClosingDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

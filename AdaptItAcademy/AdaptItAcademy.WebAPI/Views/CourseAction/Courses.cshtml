@@ -1,0 +1,51 @@
+﻿@model AdaptItAcademy.BusinessLogic.Models.CourseModel
+
+@{
+    ViewBag.Title = "Courses";
+}
+
+<h2>Courses</h2>
+
+<p>
+   <button New" onclick="location.href='@Url.Action("AddNew", "CourseAction")'" class="btn btn-primary">Add New</button>
+</p>
+<div id="errorMsg" class="alert-danger alert-error">
+    @ViewBag.ErrorMessage
+</div>
+<table id="CourseTbl" class="table table-bordered table-striped">
+    <tr>
+        <th style="width:10%">Action</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Free</th>
+        <th>Active</th>
+    </tr>
+    @if (Model != null && Model.CourseList.Count > 0)
+    {
+        foreach (var item in Model.CourseList)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseDescr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCoursePaidFor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCourseActive)
+                </td>
+            </tr>
+        }
+    }
+</table>

@@ -1,0 +1,130 @@
+﻿@model AdaptItAcademy.Models.CourseModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    ViewBag.Title = "Courses";
+    var hasRows = "false";
+}
+<style>
+</style>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <h1>
+                @ViewBag.Title
+            </h1>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-primary">
+            <div class="card">
+                <div class="card-header">
+                    <button id="btnAdd" class="btn btn-primary">
+                        <i class="fa fa-plus-square"></i>
+                        &nbsp;
+                        Add
+                    </button>
+                </div>
+                <div class="card-body">
+                    <table id="CourseTbl" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width:10%">Action</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Code</th>
+                                <th>Free</th>
+                                <th>Active</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sortable">
+                            @if (Model != null && Model.CourseList.Count > 0)
+                            {
+                                hasRows = "true";
+                                foreach (var item in Model.CourseList)
+                                {
+                            <tr style="color:#333;">
+                                <td>
+                                    <a id="btnDeleteCourse" onclick="DeleteCourse('@item.ID');" class="btn btn-info">Delete</a>
+                                </td>
+                                <td>@item.ID</td>
+                                <td>@item.CourseName</td>
+                                <td>@item.CourseCode</td>
+                                <td>@item.IsCoursePaidFor</td>
+                                <td>@item.IsCourseActive</td>
+                            </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="overlay" id="card-refresh-content">
+                    <i class="fa fa-3x fa-refresh fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+    $(document).ready(function () {
+        var selRowId;
+        $(".overlay").addClass("d-none");
+        $("#CourseTbl").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+
+        $("#btnAdd").click(function () {
+            selRowId = "0";
+            var url = "/MasterACT/_ACT?actID=" + selRowId;
+            $.get(url, function (response) {
+                if (response != "") {
+                    parent.$("#ModalContent").html(response);
+                    parent.$("#modal-response").modal({ backdrop: 'static', keyboard: true }, 'show');
+                }
+            });
+        });
+
+        $("#ACTTbl tbody tr td:not(:first-child)").on("click", function () {
+            if ('@hasRows' === 'true') {
+                selRowId = $(this).parent().find("td:nth-child(2)").html();
+                var url = "/MasterACT/_ACT?actID=" + selRowId;
+                $.get(url, function (response) {
+                    if (response != "") {
+                        parent.$("#ModalContent").html(response);
+                        parent.$("#modal-response").modal({ backdrop: 'static', keyboard: true }, 'show');
+                    }
+                });
+            }
+        });
+    });
+
+    function DeleteCourse(recordID) {
+        var url = "/MasterACT/_AccountGroups?actID=" + recordID;
+        $("#divViewAccounts").load(url);
+    }
+</script>
+
+<div class="modal fade" id="modal-response" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div id="ModalContent" class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"> </h4>
+            </div>
+            <div class="modal-body">
+                <p id="modal-text"></p>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

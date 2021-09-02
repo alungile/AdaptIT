@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ee8f889fc1fa4cd297df4ec4fe653da3" Name="Diagram1">
+        <EntityTypeShape EntityType="AdaptItAcademyModel.Course" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdaptItAcademyModel.Delegate" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdaptItAcademyModel.DietaryRequirement" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdaptItAcademyModel.Training" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="AdaptItAcademyModel.FK_Delegates_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="AdaptItAcademyModel.FK_Training_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="AdaptItAcademyModel.FK_Delegates_DietaryRequirements" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,16 @@
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\AdaptItAcademy.BusinessLogic.dll.config
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\AdaptItAcademy.BusinessLogic.dll
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\AdaptItAcademy.BusinessLogic.pdb
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\AdaptItAcademy.DataAccess.dll
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\EntityFramework.dll
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\EntityFramework.SqlServer.dll
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\AdaptItAcademy.DataAccess.pdb
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\AdaptItAcademy.DataAccess.dll.config
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\EntityFramework.xml
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\bin\Debug\EntityFramework.SqlServer.xml
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\obj\Debug\AdaptItAcademy.BusinessLogic.csprojAssemblyReference.cache
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\obj\Debug\AdaptItAcademy.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\obj\Debug\AdaptItAcademy.BusinessLogic.csproj.CopyComplete
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\obj\Debug\AdaptItAcademy.BusinessLogic.dll
+C:\Alungile\trunk\AdaptItAcademy\AdaptItAcademy.BusinessLogic\obj\Debug\AdaptItAcademy.BusinessLogic.pdb

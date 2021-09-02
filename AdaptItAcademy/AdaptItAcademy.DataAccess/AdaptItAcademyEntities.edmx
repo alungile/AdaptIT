@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AdaptItAcademyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CourseCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CourseDescr" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsCoursePaidFor" Type="bit" Nullable="false" />
+          <Property Name="IsCourseActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Delegates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DietaryID" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PostalAddress1" Type="varchar" MaxLength="50" />
+          <Property Name="PostalAddress2" Type="varchar" MaxLength="50" />
+          <Property Name="PostalAddress3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PostalCity" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PostalCode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PhysicalAddress1" Type="varchar" MaxLength="50" />
+          <Property Name="PhysicalAddress2" Type="varchar" MaxLength="50" />
+          <Property Name="PhysicalAddress3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhysicalCity" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PhysicalCode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="CourseID" Type="int" />
+        </EntityType>
+        <EntityType Name="DietaryRequirements">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Diet" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Training">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Venue" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="NumberOfSits" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="TrainingCost" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="RegClosingDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Delegates_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Delegates" Type="Self.Delegates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Delegates">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delegates_DietaryRequirements">
+          <End Role="DietaryRequirements" Type="Self.DietaryRequirements" Multiplicity="1" />
+          <End Role="Delegates" Type="Self.Delegates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DietaryRequirements">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Delegates">
+              <PropertyRef Name="DietaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Training_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Training" Type="Self.Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Training">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AdaptItAcademyModelStoreContainer">
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Delegates" EntityType="Self.Delegates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DietaryRequirements" EntityType="Self.DietaryRequirements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Training" EntityType="Self.Training" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Delegates_Course" Association="Self.FK_Delegates_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Delegates" EntitySet="Delegates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delegates_DietaryRequirements" Association="Self.FK_Delegates_DietaryRequirements">
+            <End Role="DietaryRequirements" EntitySet="DietaryRequirements" />
+            <End Role="Delegates" EntitySet="Delegates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Training_Course" Association="Self.FK_Training_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Training" EntitySet="Training" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AdaptItAcademyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseDescr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsCoursePaidFor" Type="Boolean" Nullable="false" />
+          <Property Name="IsCourseActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Delegates" Relationship="Self.FK_Delegates_Course" FromRole="Course" ToRole="Delegates" />
+          <NavigationProperty Name="Trainings" Relationship="Self.FK_Training_Course" FromRole="Course" ToRole="Training" />
+        </EntityType>
+        <EntityType Name="Delegate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DietaryID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PostalAddress1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PostalAddress2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PostalAddress3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PostalCity" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PhysicalAddress1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhysicalAddress2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhysicalAddress3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhysicalCity" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhysicalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Delegates_Course" FromRole="Delegates" ToRole="Course" />
+          <NavigationProperty Name="DietaryRequirement" Relationship="Self.FK_Delegates_DietaryRequirements" FromRole="Delegates" ToRole="DietaryRequirements" />
+        </EntityType>
+        <EntityType Name="DietaryRequirement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Diet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Delegates" Relationship="Self.FK_Delegates_DietaryRequirements" FromRole="DietaryRequirements" ToRole="Delegates" />
+        </EntityType>
+        <EntityType Name="Training">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Venue" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfSits" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TrainingCost" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="RegClosingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Training_Course" FromRole="Training" ToRole="Course" />
+        </EntityType>
+        <Association Name="FK_Delegates_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Delegates" Type="Self.Delegate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Delegates">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Training_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Training" Type="Self.Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Training">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delegates_DietaryRequirements">
+          <End Role="DietaryRequirements" Type="Self.DietaryRequirement" Multiplicity="1" />
+          <End Role="Delegates" Type="Self.Delegate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DietaryRequirements">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Delegates">
+              <PropertyRef Name="DietaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AdaptItAcademyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="Delegates" EntityType="Self.Delegate" />
+          <EntitySet Name="DietaryRequirements" EntityType="Self.DietaryRequirement" />
+          <EntitySet Name="Trainings" EntityType="Self.Training" />
+          <AssociationSet Name="FK_Delegates_Course" Association="Self.FK_Delegates_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Delegates" EntitySet="Delegates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Training_Course" Association="Self.FK_Training_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Training" EntitySet="Trainings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delegates_DietaryRequirements" Association="Self.FK_Delegates_DietaryRequirements">
+            <End Role="DietaryRequirements" EntitySet="DietaryRequirements" />
+            <End Role="Delegates" EntitySet="Delegates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AdaptItAcademyModelStoreContainer" CdmEntityContainer="AdaptItAcademyEntities">
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="AdaptItAcademyModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="CourseDescr" ColumnName="CourseDescr" />
+                <ScalarProperty Name="IsCoursePaidFor" ColumnName="IsCoursePaidFor" />
+                <ScalarProperty Name="IsCourseActive" ColumnName="IsCourseActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Delegates">
+            <EntityTypeMapping TypeName="AdaptItAcademyModel.Delegate">
+              <MappingFragment StoreEntitySet="Delegates">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DietaryID" ColumnName="DietaryID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="PostalAddress1" ColumnName="PostalAddress1" />
+                <ScalarProperty Name="PostalAddress2" ColumnName="PostalAddress2" />
+                <ScalarProperty Name="PostalAddress3" ColumnName="PostalAddress3" />
+                <ScalarProperty Name="PostalCity" ColumnName="PostalCity" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="PhysicalAddress1" ColumnName="PhysicalAddress1" />
+                <ScalarProperty Name="PhysicalAddress2" ColumnName="PhysicalAddress2" />
+                <ScalarProperty Name="PhysicalAddress3" ColumnName="PhysicalAddress3" />
+                <ScalarProperty Name="PhysicalCity" ColumnName="PhysicalCity" />
+                <ScalarProperty Name="PhysicalCode" ColumnName="PhysicalCode" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DietaryRequirements">
+            <EntityTypeMapping TypeName="AdaptItAcademyModel.DietaryRequirement">
+              <MappingFragment StoreEntitySet="DietaryRequirements">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Diet" ColumnName="Diet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainings">
+            <EntityTypeMapping TypeName="AdaptItAcademyModel.Training">
+              <MappingFragment StoreEntitySet="Training">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Venue" ColumnName="Venue" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="NumberOfSits" ColumnName="NumberOfSits" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="TrainingCost" ColumnName="TrainingCost" />
+                <ScalarProperty Name="RegClosingDate" ColumnName="RegClosingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
